@@ -38,22 +38,7 @@ android:
 
 ios:
 {
-    IOS_PACKAGE_SOURCE_DIR = $$QTADMOB_LIB_DIR/platform/ios
+    IOS_PACKAGE_SOURCE_DIR = $$PWD/platform/ios
     ios:QMAKE_INFO_PLIST = $$IOS_PACKAGE_SOURCE_DIR/Info.plist
-    ios:QMAKE_CXXFLAGS += -fobjc-arc
-    ios:QMAKE_LFLAGS += -ObjC
-    ios:QT += gui_private
-    ios:LIBS += -F $$IOS_PACKAGE_SOURCE_DIR/GoogleMobileAds -framework GoogleMobileAds \
-                -framework AVFoundation \
-                -framework AudioToolbox \
-                -framework CoreTelephony \
-                -framework MessageUI \
-                -framework SystemConfiguration \
-                -framework CoreGraphics \
-                -framework AdSupport \
-                -framework StoreKit \
-                -framework EventKit \
-                -framework EventKitUI \
-                -framework CoreMedia
 }
 
