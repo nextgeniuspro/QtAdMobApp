@@ -12,6 +12,8 @@ TARGET = QtAdMob
 VERSION = 0.0.1
 TEMPLATE = app
 
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/platform/android
+
 SOURCES += \
     main.cpp \
     MainWindow.cpp \
@@ -24,15 +26,11 @@ FORMS    += \
 
 include(QtAdMob/QtAdMob.pri)
 
-QTADMOB_LIB_DIR = $$PWD/QtAdMob
-
 android:
 {
-    ANDROID_PACKAGE_SOURCE_DIR = $$QTADMOB_LIB_DIR/platform/android
-    android:QT += androidextras gui-private
     android:DISTFILES += \
             $$ANDROID_PACKAGE_SOURCE_DIR/AndroidManifest.xml \
-            $$ANDROID_PACKAGE_SOURCE_DIR/project.properties \
+            $$ANDROID_PACKAGE_SOURCE_DIR/build.gradle \
             $$ANDROID_PACKAGE_SOURCE_DIR/src/org/dreamdev/QtAdMob/QtAdMobActivity.java
 }
 
