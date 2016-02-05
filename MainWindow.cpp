@@ -18,11 +18,14 @@ MainWindow::MainWindow(QWidget *parent)
     m_Banner->Show();
 
     m_Interstitial = CreateQtAdMobInterstitial();
-    m_Interstitial->LoadWithUnitId("ca-app-pub-7485900711629006/9462519453");
     m_Interstitial->AddTestDevice("514ED2E95AD8EECE454CC5565326160A");
-    m_Interstitial->Show();
+    connect(m_Interstitial, SIGNAL(OnLoaded()), this, SLOT(OnInterstitialLoaded()));
+    connect(m_Interstitial, SIGNAL(OnLoading()), this, SLOT(OnInterstitialLoading()));
+    connect(m_Interstitial, SIGNAL(OnClosed()), this, SLOT(OnInterstitialClosed()));
+    m_Interstitial->LoadWithUnitId("ca-app-pub-7485900711629006/9462519453");
 
     connect(ui->okButton, SIGNAL(clicked()), this, SLOT(OnButtonOkClicked()));
+    connect(ui->interstitialButton, SIGNAL(clicked()), this, SLOT(OnButtonInterstitialClicked()));
 }
 
 MainWindow::~MainWindow()
@@ -52,4 +55,29 @@ void MainWindow::OnButtonOkClicked()
         m_Banner->Hide();
         ui->okButton->setText("Show Banner");
     }
+}
+
+void MainWindow::OnButtonInterstitialClicked()
+{
+    if (m_Interstitial->IsLoaded())
+    {
+        m_Interstitial->Show();
+    }
+}
+
+void MainWindow::OnInterstitialLoaded()
+{
+    ui->interstitialButton->setText("Show Interstitial");
+    ui->interstitialButton->setEnabled(true);
+}
+
+void MainWindow::OnInterstitialLoading()
+{
+    ui->interstitialButton->setText("Loading..");
+    ui->interstitialButton->setEnabled(false);
+}
+
+void MainWindow::OnInterstitialClosed()
+{
+    m_Interstitial->LoadWithUnitId("ca-app-pub-7485900711629006/9462519453");
 }

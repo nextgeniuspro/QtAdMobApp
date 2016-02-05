@@ -22,6 +22,10 @@ protected:
     
 private slots:
     void OnButtonOkClicked();
+    void OnButtonInterstitialClicked();
+    void OnInterstitialLoaded();
+    void OnInterstitialLoading();
+    void OnInterstitialClosed();
 
 private:
     Ui::MainWindow *ui;
