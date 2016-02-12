@@ -15,13 +15,17 @@ MainWindow::MainWindow(QWidget *parent)
     m_Banner->SetUnitId("ca-app-pub-7485900711629006/8288667458");
     m_Banner->SetSize(IQtAdMobBanner::Banner);
     m_Banner->AddTestDevice("514ED2E95AD8EECE454CC5565326160A");
-    m_Banner->Show();
 
     m_Interstitial = CreateQtAdMobInterstitial();
     m_Interstitial->AddTestDevice("514ED2E95AD8EECE454CC5565326160A");
+
+    connect(m_Banner, SIGNAL(OnLoaded()), this, SLOT(OnBannerLoaded()));
+    connect(m_Banner, SIGNAL(OnLoading()), this, SLOT(OnBannerLoading()));
     connect(m_Interstitial, SIGNAL(OnLoaded()), this, SLOT(OnInterstitialLoaded()));
     connect(m_Interstitial, SIGNAL(OnLoading()), this, SLOT(OnInterstitialLoading()));
     connect(m_Interstitial, SIGNAL(OnClosed()), this, SLOT(OnInterstitialClosed()));
+
+    m_Banner->Show();
     m_Interstitial->LoadWithUnitId("ca-app-pub-7485900711629006/9462519453");
 
     connect(ui->okButton, SIGNAL(clicked()), this, SLOT(OnButtonOkClicked()));
@@ -55,6 +59,29 @@ void MainWindow::OnButtonOkClicked()
         m_Banner->Hide();
         ui->okButton->setText("Show Banner");
     }
+}
+
+void MainWindow::OnBannerLoaded()
+{
+    bool isShowed = m_Banner->IsShow();
+    if (isShowed)
+    {
+        ui->okButton->setText("Hide Banner");
+    }
+    else
+    {
+        ui->okButton->setText("Show Banner");
+    }
+    ui->okButton->setEnabled(true);
+
+    QPoint position((width() - m_Banner->GetSizeInPixels().width()) * 0.5f, 0.0f);
+    m_Banner->SetPosition(position);
+}
+
+void MainWindow::OnBannerLoading()
+{
+    ui->okButton->setText("Loading..");
+    ui->okButton->setEnabled(false);
 }
 
 void MainWindow::OnButtonInterstitialClicked()

@@ -22,6 +22,8 @@ protected:
     
 private slots:
     void OnButtonOkClicked();
+    void OnBannerLoaded();
+    void OnBannerLoading();
     void OnButtonInterstitialClicked();
     void OnInterstitialLoaded();
     void OnInterstitialLoading();
