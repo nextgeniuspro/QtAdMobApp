@@ -1,0 +1,6 @@
+[submodule "QMLApp/QtAdMob"]
+	path = QMLApp/QtAdMob
+	url = https://github.com/yevgeniy-logachev/QtAdMob.git
+[submodule "WidgetApp/QtAdMob"]
+	path = WidgetApp/QtAdMob
+	url = https://github.com/yevgeniy-logachev/QtAdMob.git
