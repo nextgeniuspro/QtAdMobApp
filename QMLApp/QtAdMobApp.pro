@@ -31,5 +31,6 @@ android:
 ios:
 {
     ios:QMAKE_INFO_PLIST = $$IOS_PACKAGE_SOURCE_DIR/Info.plist
+    ios:QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
 }
 
